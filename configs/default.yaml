@@ -1,0 +1,65 @@
+paths:
+  raw_dir: "data/raw"
+  derivatives_dir: "data/derivatives"
+  atlas_dir: "data/atlases"
+  splits_dir: "data/splits"
+  results_dir: "runs"
+
+preprocess:
+  tr: 2.0
+  bandpass_low: 0.01
+  bandpass_high: 0.1
+  smoothing_fwhm_mm: 6.0
+  detrend: true
+  difference_order: 1
+  regress_confounds: true
+  confounds_columns: ["csf", "white_matter", "trans_x", "trans_y", "trans_z", "rot_x", "rot_y", "rot_z"]
+  combat: false
+
+parcellation:
+  atlas_name: "brainnetome_246"
+  yeo_networks: 7
+  atlas_labels_nii: "data/atlases/brainnetome_246_labels.nii.gz"
+  roi_metadata_csv: "data/atlases/brainnetome_246_metadata.csv"
+  roi_to_yeo_csv: "data/atlases/brainnetome_246_to_yeo7.csv"
+  roi_centroids_csv: "data/atlases/brainnetome_246_centroids_mni.csv"
+
+granger:
+  max_lag_p: 5
+  bic_select: true
+  fdr_alpha: 0.05
+  standardize: true
+  per_module_pair: true
+
+model:
+  hidden_dim: 128
+  num_layers: 3
+  num_heads: 4
+  attn_dim: 32
+  dropout: 0.2
+  gamma_causal_bias: 1.0
+  use_posenc: true
+  posenc_dim: 24
+  num_classes: 2
+
+train:
+  seed: 42
+  epochs: 200
+  batch_size: 16
+  lr: 0.0002
+  weight_decay: 0.0001
+  early_stop_patience: 20
+  grad_clip: 1.0
+  folds: 5
+  num_workers: 2
+  amp: false
+  monitor_metric: "auc"
+  checkpoint_every: 1
+
+explain:
+  method: "gnnexplainer"
+  epochs: 200
+  lr: 0.01
+  edge_sparsity_lambda: 0.005
+  topk_edges: 200
+  topk_nodes: 50
