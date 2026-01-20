@@ -4,7 +4,7 @@
 
 Brain connectivity analysis is vital for discovering biomarkers and understanding neurological disorders. Most existing graph-transformer approaches operate on undirected functional connectivity (FC) derived from symmetric correlation measures, which ignores directed causal information flow (effective connectivity) between brain regions. This can obscure direction-specific biomarkers and limits mechanistic interpretability. BrainCGT addresses this gap by constructing subject-specific directed causal graphs from resting-state fMRI using modular parcellation and multivariate Granger causality. The model uses direction-aware node embeddings and direction-biased intra-module self-attention plus inter-module cross-attention, followed by hierarchical adaptive fusion for graph-level diagnosis. Experiments on ADNI, PPMI, and ABIDE demonstrate consistent gains over strong functional-connectivity and causal-connectivity baselines, and a directed explainer produces edge/node/module attribution maps for post-hoc analysis.
 
-![BrainCGT Framework Diagram](./BrainCGT.png)
+![BrainCGT Framework Diagram](./BrainCGT.jpg)
 
 
 
